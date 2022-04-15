@@ -2,3 +2,4 @@
 inside PublicClient."""
 
 from gogettr.public import PublicClient  # noqa: F401
+from gogettr.private import PrivateClient

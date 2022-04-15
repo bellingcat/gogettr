@@ -21,9 +21,12 @@ class ApiClient:
     """A standard and safe way to interact with the GETTR API. Catches errors, supports
     retries, etc."""
 
-    def __init__(self, api_base_url: str = None):
-        """Initializes the API client. Optionally takes in a base URL for the GETTR api."""
+    def __init__(self, api_base_url: str = None, headers: dict = None):
+        """Initializes the API client. Optionally takes in a base URL for the GETTR api, and additional headers."""
         self.api_base_url = api_base_url or "https://api.gettr.com"
+        self.headers={"User-Agent": USER_AGENT}
+        if headers is not None:
+            self.headers.update(headers)
 
     def get(
         self, url: str, params: dict = None, retries: int = 3, key: str = "result"
@@ -53,7 +56,7 @@ class ApiClient:
                     self.api_base_url + url,
                     params=params,
                     timeout=10,
-                    headers={"User-Agent": USER_AGENT},
+                    headers=self.headers,
                 )
             except ReadTimeout as err:
                 handle_error({"timeout": err})
