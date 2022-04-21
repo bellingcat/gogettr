@@ -14,7 +14,7 @@ class PrivateClient(PublicClient):
     def __init__(self, username: str, token: str):
         headers = {
             'X-App-Auth': json.dumps({
-                'user': username, 
+                'user': username.lower(), 
                 'token': token
             }),
         }

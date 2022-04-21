@@ -8,8 +8,9 @@ def merge(*dicts):
 
     out = dict()
     for dictionary in dicts:
-        for (key, val) in dictionary.items():
-            out[key] = val
+        if dictionary is not None:
+            for (key, val) in dictionary.items():
+                out[key] = val
     return out
 
 
